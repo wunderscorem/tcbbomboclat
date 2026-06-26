@@ -1,5 +1,5 @@
 import { createLogger } from '../../utils/logger.js';
-import CONFIG from '../../config/index.js'
+import { CONFIG } from '../../config/index.js'
 
 const api = CONFIG.API_URL;
 const logger = createLogger('dal.country');
