@@ -1,4 +1,6 @@
+import { ExchangeService } from '../services/service.exchange.js';
 import {CountryDal} from '../dal/dal.country.js'
+
 
 export const convert = {
   // GET /api/convert?from=USD&to=THB&amount=1000
@@ -8,7 +10,7 @@ export const convert = {
       return res.status(400).json({ error: 'Bad Request: No "from", "to", "amount" params provided.' });
     }
     try {
-      const result = 'not done'
+      const result = await ExchangeService.convert({ from, to, amount });
       return res.json(result);
     } catch (err) {
       return res.status(500).json({ error: err.message });
@@ -23,7 +25,7 @@ export const convert = {
     const isCodeValid = CountryDal.getByT("code", code)
 
     try {
-      const result = 'not done'
+      const result = await ExchangeService.getRates(code);
       return res.json(result);
     } catch (err) {
       return res.status(500).json({ error: err.message });
